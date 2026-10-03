@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="hi" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>दिव्य गर्भगृह - श्री नवरात्रोत्सव</title>
+
+    <!-- Tailwind CSS & FontAwesome Icons -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Rozha+One&family=Yatra+One&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: '#FFD700',
+                        saffron: '#FF5722',
+                        crimson: '#800020',
+                        darkbg: '#0A0104',
+                    },
+                    fontFamily: {
+                        hindi: ['Yatra One', 'cursive'],
+                        serifHindi: ['Rozha One', 'serif'],
+                        body: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        body {
+            background: radial-gradient(circle at center, #1c0209 0%, #050002 100%);
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            user-select: none;
+        }
+
+        .glass-panel {
+            background: rgba(255, 215, 0, 0.04);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 215, 0, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.7);
+        }
+
+        .mandir-frame {
+            border: 3px solid #d97706;
+            box-shadow: 0 0 30px rgba(217, 119, 6, 0.35), inset 0 0 20px rgba(0,0,0,0.85);
+        }
+
+        /* Divine Aura Behind Image */
+        .divine-aura {
+            position: absolute;
+            width: 270px;
+            height: 270px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #ff0055, #ffd700, #ff5722, #ffd700, #ff0055);
+            filter: blur(22px);
+            opacity: 0.75;
+            animation: rotateAura 12s linear infinite;
+        }
+
+        @media (min-width: 640px) {
+            .divine-aura {
+                width: 330px;
+                height: 330px;
+            }
+        }
+
+        @keyframes rotateAura {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.05); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        .maa-img-container {
+            width: 200px;
+            height: 200px;
+        }
+        @media (min-width: 640px) {
+            .maa-img-container {
+                width: 240px;
+                height: 240px;
+            }
+        }
+
+        /* Diya Flame Effect */
+        .diya-flame {
+            width: 10px;
+            height: 18px;
+            background: linear-gradient(to top, #ff1100, #ffaa00, #ffffff);
+            border-radius: 50% 50% 20% 20%;
+            filter: drop-shadow(0 0 8px #ffaa00);
+            animation: flicker 0.12s ease-in-out infinite alternate;
+        }
+
+        .diya-unlit {
+            opacity: 0.2;
+            filter: grayscale(1);
+        }
+
+        .shrine-diya-glow {
+            box-shadow: 0 0 20px rgba(255, 165, 0, 0.8);
+        }
+
+        @keyframes flicker {
+            0% { transform: scale(1) rotate(-2deg); opacity: 0.9; }
+            100% { transform: scale(1.15) rotate(2deg); opacity: 1; }
+        }
+
+        /* Bell Swing Effect */
+        .bell-swing {
+            transform-origin: top center;
+            cursor: pointer;
+        }
+        .bell-swing.ring {
+            animation: swingBell 0.8s ease-in-out 2 alternate;
+        }
+
+        @keyframes swingBell {
+            0% { transform: rotate(-20deg); }
+            100% { transform: rotate(20deg); }
+        }
+
+        /* Aarti Thali Animation */
+        .aarti-thali-container {
+            transition: transform 0.1s linear;
+        }
+        .aarti-thali-container.rotating {
+            animation: rotateThali 4s linear infinite;
+        }
+        @keyframes rotateThali {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* 3 Flip Game Cards Styles */
+        .game-flip-card {
+            perspective: 1000px;
+            width: 31%;
+            max-width: 110px;
+            height: 145px;
+            cursor: pointer;
+        }
+        .game-flip-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .game-flip-card.flipped .game-flip-inner {
+            transform: rotateY(180deg);
+        }
+        .game-front, .game-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+            border: 1.5px solid rgba(255, 215, 0, 0.4);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+        .game-front {
+            background: linear-gradient(135deg, #b45309, #78350f);
+            color: white;
+        }
+        .game-back {
+            background: rgba(25, 5, 12, 0.95);
+            color: #ffd700;
+            transform: rotateY(180deg);
+            font-size: 11px;
+        }
+
+        #effectsCanvas {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 40;
+        }
+
+        ::-webkit-scrollbar { height: 4px; width: 4px; }
+        ::-webkit-scrollbar-track { background: rgba(10, 1, 4, 0.8); }
+        ::-webkit-scrollbar-thumb { background: #d97706; border-radius: 10px; }
+    </style>
+</head>
+<body class="flex flex-col justify-between min-h-screen">
+
+    <canvas id="effectsCanvas"></canvas>
+
+    <!-- TOP NAVIGATION BAR -->
+    <header class="sticky top-0 z-50 glass-panel border-b border-amber-500/30 px-3 py-2 flex flex-col sm:flex-row justify-between items-center gap-2">
+        <div class="flex items-center justify-between w-full sm:w-auto">
+            <div class="flex items-center gap-2">
+                <span class="text-xl text-gold animate-pulse">🛕</span>
+                <div>
+                    <h1 class="font-hindi text-lg text-gold tracking-wide leading-tight">दिव्य गर्भगृह</h1>
+                    <p class="text-[10px] text-amber-200/60">🌐 <span id="liveVisitorsCount">14,097</span> भक्त लाइव दर्शन कर रहे हैं</p>
+                </div>
+            </div>
+            <span class="bg-rose-950/80 text-rose-300 border border-rose-500/50 text-[9px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider" id="jyotiNavStatus">
+                🪔 अखंड ज्योति: शांत (बुझी हुई)
+            </span>
+        </div>
+
+        <!-- QUICK ACTION BAR -->
+        <div class="flex items-center justify-start gap-1.5 overflow-x-auto w-full sm:w-auto py-1 scrollbar-none">
+            <button onclick="openOilRefillModal()" class="flex-shrink-0 bg-amber-500/10 border border-amber-500/40 text-amber-200 px-2.5 py-1 rounded-full text-[11px] flex items-center gap-1 hover:bg-gold/20 active:scale-95 transition">
+                <span>🪔</span> <span>अखंड ज्योति सेवा</span>
+            </button>
+            <button onclick="openJaapModal()" class="flex-shrink-0 bg-amber-500/10 border border-amber-500/40 text-amber-200 px-2.5 py-1 rounded-full text-[11px] flex items-center gap-1 hover:bg-gold/20 active:scale-95 transition">
+                <span>📿</span> <span>जाप माला</span>
+            </button>
+            <button onclick="openKitchenModal()" class="flex-shrink-0 bg-amber-500/10 border border-amber-500/40 text-amber-200 px-2.5 py-1 rounded-full text-[11px] flex items-center gap-1 hover:bg-gold/20 active:scale-95 transition">
+                <span>🍲</span> <span>प्रसाद रसोई</span>
+            </button>
+            <button onclick="openWallpaperModal()" class="flex-shrink-0 bg-amber-500/10 border border-amber-500/40 text-amber-200 px-2.5 py-1 rounded-full text-[11px] flex items-center gap-1 hover:bg-gold/20 active:scale-95 transition">
+                <span>🖼️</span> <span>वॉलपेपर</span>
+            </button>
+            <button onclick="openKanyaPujanModal()" class="flex-shrink-0 bg-amber-500/10 border border-amber-500/40 text-amber-200 px-2.5 py-1 rounded-full text-[11px] flex items-center gap-1 hover:bg-gold/20 active:scale-95 transition">
+                <span>👧</span> <span>कन्या पूजन</span>
+            </button>
+            <button onclick="triggerPushpanjali()" class="flex-shrink-0 bg-amber-500/20 border border-gold text-gold px-2.5 py-1 rounded-full text-[11px] flex items-center gap-1 hover:bg-gold/30 active:scale-95 transition">
+                <span>🌸</span> <span>पुष्पांजलि</span>
+            </button>
+            <button onclick="toggleMainAudio()" id="audioToggleBtn" class="flex-shrink-0 bg-gold/20 border border-gold text-gold rounded-full text-xs w-7 h-7 flex items-center justify-center hover:bg-gold/40 transition" title="Aarti Sound">
+                <i class="fa-solid fa-music" id="audioIcon"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN TEMPLE SANCTUM -->
+    <main class="container mx-auto px-2 md:px-4 py-3 max-w-4xl flex-grow relative" id="mainContainer">
+        <div class="relative rounded-3xl glass-panel mandir-frame p-3 sm:p-6 mb-4 overflow-hidden">
+            
+            <!-- BELLS -->
+            <div class="absolute top-3 left-4 text-amber-400 text-2xl bell-swing z-30" id="bellLeft" onclick="ringBell('bellLeft')">
+                <i class="fa-solid fa-bell drop-shadow-[0_0_10px_rgba(255,215,0,0.8)]"></i>
+            </div>
+            <div class="absolute top-3 right-4 text-amber-400 text-2xl bell-swing z-30" id="bellRight" onclick="ringBell('bellRight')">
+                <i class="fa-solid fa-bell drop-shadow-[0_0_10px_rgba(255,215,0,0.8)]"></i>
+            </div>
+
+            <div class="text-center mb-1">
+                <span class="font-serifHindi text-amber-300 text-[11px] tracking-widest">॥ जय श्री जगदम्बे ॥</span>
+            </div>
+
+            <!-- MAA DURGA CENTER IMAGE DISPLAY -->
+            <div class="relative flex flex-col items-center justify-center text-center z-10 py-1">
+                <div class="divine-aura" id="divineAura"></div>
+                <div class="relative z-10 maa-img-container rounded-full p-2 border-4 border-gold shadow-[0_0_40px_rgba(255,215,0,0.7)] bg-gradient-to-b from-black via-amber-950/80 to-black overflow-hidden mb-3">
+                    <img id="maaImage" src="shailputri.png" alt="Maa Durga" class="w-full h-full object-contain p-1 rounded-full transition-all duration-500 drop-shadow-2xl" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1600100397608-f010e423b971?q=80&w=600&auto=format&fit=crop';">
+                </div>
+                <span class="text-[10px] uppercase tracking-widest text-amber-400 font-bold block mb-0.5" id="swaroopDay">प्रथम नवरात्रि</span>
+                <h2 class="font-hindi text-2xl sm:text-4xl text-amber-100 drop-shadow-[0_0_15px_rgba(255,215,0,0.7)] mb-1" id="swaroopTitle">मां शैलपुत्री</h2>
+                <div class="px-3 py-1 bg-amber-500/10 border border-gold/30 rounded-full text-gold font-serifHindi text-xs sm:text-sm mb-3 max-w-xs text-center" id="swaroopMantra">
+                    मंत्र: ॐ देवी शैलपुत्र्यै नमः॥
+                </div>
+                <div class="flex flex-wrap justify-center gap-2 z-20">
+                    <button onclick="ringBell('bellLeft')" class="px-3 py-1 rounded-xl bg-amber-500/10 border border-gold/30 text-amber-200 text-xs hover:bg-gold/25 active:scale-95 transition">🔔 घंटा नाद</button>
+                    <button onclick="playShankh()" class="px-3 py-1 rounded-xl bg-amber-500/10 border border-gold/30 text-amber-200 text-xs hover:bg-gold/25 active:scale-95 transition">🐚 शंख ध्वनि</button>
+                    <button onclick="openJaapModal()" class="px-3 py-1 rounded-xl bg-amber-500/10 border border-gold/30 text-amber-200 text-xs hover:bg-gold/25 active:scale-95 transition">📿 जाप (<span id="quickJaapCount">0</span>)</button>
+                </div>
+            </div>
+
+            <!-- AARTI THALI SECTION -->
+            <div class="relative z-20 my-3 flex flex-col items-center justify-center">
+                <div id="aartiThali" class="w-36 h-36 sm:w-48 sm:h-48 rounded-full border-4 border-gold bg-gradient-to-tr from-amber-950 via-yellow-700 to-amber-950 shadow-[0_0_25px_rgba(255,215,0,0.4)] flex items-center justify-center relative cursor-grab active:cursor-grabbing aarti-thali-container" onmousedown="startThaliDrag(event)" onmousemove="dragThali(event)" onmouseup="stopThaliDrag()" ontouchstart="startThaliDrag(event)" ontouchmove="dragThali(event)" ontouchend="stopThaliDrag()">
+                    <div class="absolute top-2 flex flex-col items-center"><div id="thaliDiyaTop" class="diya-flame diya-unlit"></div><span class="text-[9px]">🪔</span></div>
+                    <div class="absolute bottom-2 flex flex-col items-center"><div id="thaliDiyaBottom" class="diya-flame diya-unlit"></div><span class="text-[9px]">🪔</span></div>
+                    <div class="absolute left-2 flex flex-col items-center"><div id="thaliDiyaLeft" class="diya-flame diya-unlit"></div><span class="text-[9px]">🪔</span></div>
+                    <div class="absolute right-2 flex flex-col items-center"><div id="thaliDiyaRight" class="diya-flame diya-unlit"></div><span class="text-[9px]">🪔</span></div>
+                    <div class="flex flex-col items-center">
+                        <div id="thaliDiyaCenter" class="diya-flame diya-unlit mb-0.5"></div>
+                        <span class="text-lg">🌸</span>
+                        <span class="text-[8px] text-amber-200/90 font-bold">आरती थाली</span>
+                    </div>
+                </div>
+                <p class="text-[10px] text-amber-200/60 mt-1">थाली ड्रैग करें (आरती प्ले होगी)</p>
+                <div id="aartiLyricsBox" class="mt-2 bg-black/60 border border-gold/30 rounded-2xl px-3 py-1.5 text-center text-[11px] text-amber-200 max-w-sm w-full">
+                    <span class="text-[9px] text-gold font-bold block mb-0.5">📖 आरती जय अम्बे गौरी</span>
+                    <p id="aartiLyricsLine" class="font-serifHindi animate-pulse">जय अम्बे गौरी, मैया जय श्यामा गौरी। तुमको निशदिन ध्यावत, हरि ब्रह्मा शिवरी॥</p>
+                </div>
+            </div>
+
+            <!-- OFFERINGS DOCK -->
+            <div class="mt-4 border-t border-amber-500/20 pt-3">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-xs font-serifHindi text-gold flex items-center gap-1"><span>👑</span> पावन चढ़ावा</span>
+                    <span class="text-[9px] text-amber-200/50">क्लिक करके अर्पित करें</span>
+                </div>
+                <div class="grid grid-cols-4 gap-2 text-center">
+                    <button onclick="offerItem('pushp')" class="p-2 rounded-xl bg-black/40 border border-amber-500/20 hover:border-gold active:scale-95 transition flex flex-col items-center justify-center"><span class="text-lg mb-0.5">🌸</span><strong class="text-[10px] text-amber-100">पुष्प</strong></button>
+                    <button onclick="offerItem('chunri')" class="p-2 rounded-xl bg-black/40 border border-amber-500/20 hover:border-gold active:scale-95 transition flex flex-col items-center justify-center"><span class="text-lg mb-0.5">🧣</span><strong class="text-[10px] text-amber-100">चुनरी</strong></button>
+                    <button onclick="offerItem('bhog')" class="p-2 rounded-xl bg-black/40 border border-amber-500/20 hover:border-gold active:scale-95 transition flex flex-col items-center justify-center"><span class="text-lg mb-0.5">🍧</span><strong class="text-[10px] text-amber-100">प्रसाद</strong></button>
+                    <button onclick="offerItem('incense')" class="p-2 rounded-xl bg-black/40 border border-amber-500/20 hover:border-gold active:scale-95 transition flex flex-col items-center justify-center"><span class="text-lg mb-0.5">🪵</span><strong class="text-[10px] text-amber-100">धूप</strong></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3 FLIP CARDS GAME SECTION WITH RESET -->
+        <section class="glass-panel p-4 rounded-3xl border border-amber-500/30 mb-4 text-center">
+            <div class="flex justify-between items-center mb-2">
+                <h3 class="font-serifHindi text-sm sm:text-base text-gold">✨ आज का माँ का दिव्य संदेश (3 कार्ड गेम)</h3>
+                <button onclick="resetFlipCards()" class="text-[10px] bg-amber-500/20 border border-gold/50 text-gold px-2.5 py-1 rounded-xl hover:bg-gold/30 transition">🔄 फिर से खेलें</button>
+            </div>
+            <p class="text-[11px] text-amber-200/70 mb-3">कोई भी 1 कार्ड चुनें और जानें आज का अपना शुभ संकेत व राशिफल:</p>
+            
+            <div class="flex justify-center gap-2 sm:gap-4 mb-3">
+                <div class="game-flip-card" onclick="chooseGameCard(0)">
+                    <div class="game-flip-inner" id="gcard-0">
+                        <div class="game-front"><span class="text-2xl mb-1">🌸</span><span class="text-[11px] font-bold">भक्ति</span></div>
+                        <div class="game-back" id="gback-0"></div>
+                    </div>
+                </div>
+                <div class="game-flip-card" onclick="chooseGameCard(1)">
+                    <div class="game-flip-inner" id="gcard-1">
+                        <div class="game-front"><span class="text-2xl mb-1">🔱</span><span class="text-[11px] font-bold">शक्ति</span></div>
+                        <div class="game-back" id="gback-1"></div>
+                    </div>
+                </div>
+                <div class="game-flip-card" onclick="chooseGameCard(2)">
+                    <div class="game-flip-inner" id="gcard-2">
+                        <div class="game-front"><span class="text-2xl mb-1">✨</span><span class="text-[11px] font-bold">सिद्धि</span></div>
+                        <div class="game-back" id="gback-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="gameResultBox" class="hidden bg-black/70 border border-gold/40 p-3 rounded-2xl text-left text-xs max-w-sm mx-auto shadow-2xl">
+                <h4 class="text-gold font-bold text-xs sm:text-sm mb-1" id="resTitle"></h4>
+                <p class="text-amber-100 mb-2 text-[11px] leading-relaxed" id="resMsg"></p>
+                <p class="text-amber-300 text-[11px]"><b>शुभ रंग:</b> <span id="resColor"></span></p>
+                <button onclick="shareGameResult()" class="mt-2.5 w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-1.5 rounded-xl text-center flex items-center justify-center gap-1.5 text-xs transition">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp पर शेयर करें
+                </button>
+            </div>
+        </section>
+
+        <!-- NAVDURGA 9 SWAROOP DOCK -->
+        <section class="mt-2">
+            <h3 class="font-serifHindi text-xs sm:text-sm text-gold mb-2 flex items-center gap-1"><span>🔱</span> नवदुर्गा ९ पावन स्वरूप</h3>
+            <div class="flex gap-2 overflow-x-auto pb-2 scrollbar-none">
+                <button onclick="selectSwaroop(1)" id="swTab-1" class="swaroop-btn flex-shrink-0 p-2 rounded-xl border border-gold bg-gold/20 text-gold font-bold text-xs w-20 text-center shadow-md">🌸 शैलपुत्री</button>
+                <button onclick="selectSwaroop(2)" id="swTab-2" class="swaroop-btn flex-shrink-0 p-2 rounded-xl border border-amber-500/20 bg-black/40 text-amber-200/80 text-xs w-20 text-center hover:border-gold transition">🌼 ब्रह्मचारिणी</button>
+                <button onclick="selectSwaroop(3)" id="swTab-3" class="swaroop-btn flex-shrink-0 p-2 rounded-xl border border-amber-500/20 bg-black/40 text-amber-200/80 text-xs w-20 text-center hover:border-gold transition">🌸 चंद्रघंटा</button>
+                <button onclick="selectSwaroop(4)" id="swTab-4" class="swaroop-btn flex-shrink-0 p-2 rounded-xl border border-amber-500/20 bg-black/40 text-amber-200/80 text-xs w-20 text-center hover:border-gold transition">🌻 कूष्मांडा</button>
+                <button onclick="selectSwaroop(5)" id="swTab-5" class="swaroop-btn flex-shrink-0 p-2 rounded-xl border border-amber-500/20 bg-black/40 text-amber-200/80 text-xs w-20 text-center hover:border-gold transition">🌹 स्कंदमाता</button>
+                <button onclick="selectSwaroop(6)" id="swTab-6" class="swaroop-btn flex-shrink-0 p-2 rounded-xl border border-amber-500/20 bg-black/40 text-amber-200/80 text-xs w-20 text-center hover:border-gold transition">🌷 कात्यायनी</button>
+                <button onclick="selectSwaroop(7)" id="swTab-7" class="swaroop-btn flex-shrink-0 p-2 rounded-xl border border-amber-500/20 bg-black/40 text-amber-200/80 text-xs w-20 text-center hover:border-gold transition">🪷 कालरात्रि</button>
+                <button onclick="selectSwaroop(8)" id="swTab-8" class="swaroop-btn flex-shrink-0 p-2 rounded-xl border border-amber-500/20 bg-black/40 text-amber-200/80 text-xs w-20 text-center hover:border-gold transition">💮 महागौरी</button>
+                <button onclick="selectSwaroop(9)" id="swTab-9" class="swaroop-btn flex-shrink-0 p-2 rounded-xl border border-amber-500/20 bg-black/40 text-amber-200/80 text-xs w-20 text-center hover:border-gold transition">✨ सिद्धिदात्री</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL 1: AKHAND DIYA (OFF BY DEFAULT) -->
+    <div id="oilRefillModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="glass-panel p-5 rounded-3xl border border-gold/50 max-w-xs sm:max-w-md w-full text-center relative">
+            <button onclick="closeOilRefillModal()" class="absolute top-3 right-4 text-gold text-lg"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="font-hindi text-lg text-gold mb-1">🪔 अखंड ज्योति सेवा गेम</h3>
+            <p class="text-[11px] text-amber-200/70 mb-3">माचिस की तीली से दीया जलाएं और समय पर तेल/घी समर्पित करें!</p>
+            <div class="my-3 flex flex-col items-center justify-center bg-black/60 p-4 rounded-2xl border border-gold/30">
+                <div id="modalDiyaFlame" class="diya-flame diya-unlit mb-1"></div>
+                <div class="text-3xl mb-2">🪔</div>
+                <p id="diyaStateText" class="text-xs text-rose-400 font-bold">दीया अभी बुझा हुआ है! माचिस जलाएं।</p>
+            </div>
+            <div class="mb-3 bg-black/50 p-3 rounded-2xl border border-gold/30">
+                <div class="flex justify-between text-xs text-amber-200 mb-1"><span>तेल / घी स्तर:</span><strong id="oilLevelText">0%</strong></div>
+                <div class="w-full bg-slate-800 rounded-full h-2.5 overflow-hidden border border-gold/40"><div id="oilBar" class="bg-gradient-to-r from-amber-500 to-yellow-400 h-full transition-all duration-300" style="width: 0%;"></div></div>
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+                <button onclick="lightDiyaWithMatch()" class="bg-amber-600 hover:bg-amber-500 text-white font-bold py-2 rounded-xl text-xs transition shadow-lg flex items-center justify-center gap-1"><span>🪵</span> माचिस जलाएं</button>
+                <button onclick="refillOil()" class="bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 font-bold py-2 rounded-xl text-xs hover:scale-105 transition shadow-lg flex items-center justify-center gap-1"><span>🫗</span> तेल/घी डालें (+25%)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: MANTRA JAAP COUNTER -->
+    <div id="jaapModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="glass-panel p-5 rounded-3xl border border-gold/50 max-w-xs sm:max-w-md w-full text-center relative">
+            <button onclick="closeJaapModal()" class="absolute top-3 right-4 text-gold text-lg"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="font-hindi text-lg text-gold mb-1">📿 महामंत्र जाप माला काउंटर</h3>
+            <p class="text-[11px] text-amber-200/70 mb-2">"ॐ ऐं ह्रीं क्लीं चामुण्डायै विच्चे"</p>
+            <div class="my-3 py-3 bg-black/60 rounded-2xl border border-gold/30">
+                <span class="text-3xl font-bold text-gold block mb-0.5" id="fullJaapCount">0</span>
+                <span class="text-[10px] text-amber-200/60">लक्ष्य: <strong id="jaapTargetDisplay">108</strong> जाप</span>
+            </div>
+            <div class="flex gap-2 justify-center mb-3">
+                <button onclick="setJaapTarget(108)" class="px-2.5 py-1 rounded-lg bg-amber-500/20 border border-gold/50 text-[11px] text-amber-200">108 माला</button>
+                <button onclick="setJaapTarget(1008)" class="px-2.5 py-1 rounded-lg bg-amber-500/20 border border-gold/50 text-[11px] text-amber-200">1008 महाजाप</button>
+            </div>
+            <button onclick="incrementAdvancedJaap()" class="w-full bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 font-bold py-2.5 rounded-2xl text-xs hover:scale-105 transition shadow-lg mb-1.5">📿 जाप करें (काउंट बढ़ाएं)</button>
+            <button onclick="resetJaap()" class="text-[10px] text-rose-400 hover:underline">रीसेट करें</button>
+        </div>
+    </div>
+
+    <!-- MODAL 3: PRASAD KITCHEN SIMULATOR -->
+    <div id="kitchenModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="glass-panel p-5 rounded-3xl border border-gold/50 max-w-xs sm:max-w-md w-full text-center relative">
+            <button onclick="closeKitchenModal()" class="absolute top-3 right-4 text-gold text-lg"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="font-hindi text-lg text-gold mb-1">🍲 प्रसाद रसोई सिमुलेटर</h3>
+            <p class="text-[11px] text-amber-200/70 mb-3">सामग्री मिला कर माँ के लिए पवित्र हलवा-प्रसाद तैयार करें</p>
+            <div id="kitchenStepBox" class="bg-black/50 p-3 rounded-2xl border border-gold/30 mb-3 text-left text-xs space-y-2">
+                <p class="text-gold font-bold">चरण 1: कड़ाही में शुद्ध देसी घी डालें।</p>
+                <button onclick="proceedKitchenStep(1)" class="w-full bg-amber-500/20 border border-gold text-gold py-1.5 rounded-xl text-center hover:bg-gold/30">🫕 शुद्ध देसी घी डालें</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 4: DEVOTEE WALLPAPER GENERATOR -->
+    <div id="wallpaperModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="glass-panel p-5 rounded-3xl border border-gold/50 max-w-xs sm:max-w-md w-full text-center relative max-h-[85vh] overflow-y-auto">
+            <button onclick="closeWallpaperModal()" class="absolute top-3 right-4 text-gold text-lg"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="font-hindi text-lg text-gold mb-1">🖼️ कस्टम भक्त वॉलपेपर जनरेटर</h3>
+            <p class="text-[11px] text-amber-200/70 mb-3">अपना नाम लिखकर सुंदर नवरात्री स्टेटस कार्ड बनाएं</p>
+            <div class="space-y-2 mb-3 text-left">
+                <div>
+                    <label class="text-[10px] text-amber-200 block mb-1">भक्त का नाम:</label>
+                    <input type="text" id="wpNameInput" placeholder="जैसे: कार्तिक राणा" class="w-full p-2 rounded-xl bg-black/60 border border-gold/40 text-amber-100 text-xs focus:outline-none focus:border-gold">
+                </div>
+            </div>
+            <div id="wallpaperPreviewCard" class="relative rounded-2xl border-2 border-gold p-3 bg-gradient-to-b from-amber-950 via-rose-950 to-black text-center mb-3 overflow-hidden shadow-2xl">
+                <span class="text-[9px] text-gold uppercase tracking-widest block mb-0.5">॥ जय माता दी ॥</span>
+                <div class="w-24 h-24 mx-auto rounded-full border-2 border-gold overflow-hidden my-1 bg-black/80">
+                    <img id="wpImagePreview" src="shailputri.png" class="w-full h-full object-contain p-1">
+                </div>
+                <h4 class="font-hindi text-base text-amber-100" id="wpCardTitle">मां शैलपुत्री</h4>
+                <p class="text-[9px] text-amber-200 italic mt-0.5">"शुभ कर तू देवी कल्याण..."</p>
+                <div class="mt-2 pt-1.5 border-t border-gold/30 text-xs text-gold font-bold">श्रद्धालु: <span id="wpCardName">भक्तगण</span></div>
+            </div>
+            <button onclick="downloadWallpaperCard()" class="w-full bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 font-bold py-2 rounded-xl text-xs hover:scale-105 transition shadow-lg">📥 वॉलपेपर कार्ड सेव करें</button>
+        </div>
+    </div>
+
+    <!-- MODAL 5: KANYA PUJAN GAME -->
+    <div id="kanyaPujanModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="glass-panel p-5 rounded-3xl border border-gold/50 max-w-sm sm:max-w-lg w-full text-center relative max-h-[85vh] overflow-y-auto">
+            <button onclick="closeKanyaPujanModal()" class="absolute top-3 right-4 text-gold text-lg"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="font-hindi text-xl text-gold mb-1">👧 वर्चुअल कन्या पूजन गेम</h3>
+            <p class="text-[11px] text-amber-200/70 mb-3">कन्याओं पर क्लिक करके उन्हें हलवा-पूरी व दक्षिणा भेंट करें!</p>
+            <div class="grid grid-cols-3 gap-2 mb-3" id="kanyaGrid"></div>
+            <div id="kanyaStatusBox" class="p-2 bg-black/60 border border-gold/30 rounded-2xl text-xs text-amber-200 mb-2">
+                कन्या पूजन स्थिति: <span id="fedKanyaCount" class="text-gold font-bold">0</span> / 9 सेवा पूर्ण
+            </div>
+        </div>
+    </div>
+
+    <audio id="bgAudio" src="song.mp3" loop preload="auto"></audio>
+    <audio id="bellAudio" src="bell.mp3" preload="auto"></audio>
+
+    <footer class="glass-panel border-t border-amber-500/20 py-2 text-center text-[10px] text-amber-200/50">
+        ॥ या देवी सर्वभूतेषु शक्ति-रूपेण संस्थिता । नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः ॥
+    </footer>
+
+    <!-- JAVASCRIPT ENGINE -->
+    <script>
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const bgAudio = document.getElementById('bgAudio');
+        const bellAudio = document.getElementById('bellAudio');
+        let bellTimer = null;
+
+        function playBellSound() {
+            if (bellAudio) {
+                bellAudio.currentTime = 0;
+                bellAudio.play().catch(() => synthesizeBell());
+                if (bellTimer) clearTimeout(bellTimer);
+                bellTimer = setTimeout(() => {
+                    bellAudio.pause();
+                    bellAudio.currentTime = 0;
+                }, 30000);
+            } else {
+                synthesizeBell();
+            }
+        }
+
+        function synthesizeBell() {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(1200, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(300, audioCtx.currentTime + 1.8);
+            gain.gain.setValueAtTime(0.5, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.8);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 1.8);
+        }
+
+        function playShankh() {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(160, audioCtx.currentTime);
+            osc.frequency.linearRampToValueAtTime(320, audioCtx.currentTime + 1.2);
+            osc.frequency.linearRampToValueAtTime(180, audioCtx.currentTime + 3.0);
+            gain.gain.setValueAtTime(0.01, audioCtx.currentTime);
+            gain.gain.linearRampToValueAtTime(0.3, audioCtx.currentTime + 0.8);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 3.0);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 3.0);
+        }
+
+        function ringBell(id) {
+            playBellSound();
+            const bell = document.getElementById(id);
+            if(bell) {
+                bell.classList.add('ring');
+                setTimeout(() => bell.classList.remove('ring'), 1600);
+            }
+        }
+
+        function toggleMainAudio() {
+            const icon = document.getElementById('audioIcon');
+            if (bgAudio.paused) {
+                bgAudio.play().catch(() => console.log('Audio autoplay blocked'));
+                icon.className = "fa-solid fa-pause text-gold";
+                startAartiLyricsSync();
+            } else {
+                bgAudio.pause();
+                icon.className = "fa-solid fa-music text-gold";
+            }
+        }
+
+        const aartiLyricsList = [
+            "जय अम्बे गौरी, मैया जय श्यामा गौरी। तुमको निशदिन ध्यावत, हरि ब्रह्मा शिवरी॥",
+            "मांग सिंदूर विराजत, टीको मृगमद को। उज्ज्वल से दोऊ नैना, चंद्रवदन नीको॥",
+            "कनक समान कलेवर, रक्तांबर राजै। रक्तपुष्प गलमाला, कण्ठन पर साजै॥",
+            "केहरि वाहन राजत, खड्ग खप्परधारी। सुर-नर-मुनिजन सेवत, तिनके दुखहारी॥"
+        ];
+        let lyricsIdx = 0;
+        function startAartiLyricsSync() {
+            setInterval(() => {
+                if(!bgAudio.paused) {
+                    lyricsIdx = (lyricsIdx + 1) % aartiLyricsList.length;
+                    document.getElementById('aartiLyricsLine').innerText = aartiLyricsList[lyricsIdx];
+                }
+            }, 6000);
+        }
+
+        let isThaliDragging = false;
+        const thali = document.getElementById('aartiThali');
+        const icon = document.getElementById('audioIcon');
+
+        function startThaliDrag(e) {
+            isThaliDragging = true;
+            thali.classList.add('rotating');
+            if (bgAudio.paused) {
+                bgAudio.play().catch(() => {});
+                icon.className = "fa-solid fa-pause text-gold";
+                startAartiLyricsSync();
+            }
+        }
+        function dragThali(e) {}
+        function stopThaliDrag() { isThaliDragging = false; }
+        window.addEventListener('mouseup', () => { if (isThaliDragging) { isThaliDragging = false; thali.classList.remove('rotating'); bgAudio.pause(); icon.className = "fa-solid fa-music text-gold"; } });
+        window.addEventListener('touchend', () => { if (isThaliDragging) { isThaliDragging = false; thali.classList.remove('rotating'); bgAudio.pause(); icon.className = "fa-solid fa-music text-gold"; } });
+
+        const canvas = document.getElementById('effectsCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        function offerItem(type) {
+            playBellSound();
+            const emojis = { pushp: ['🌸', '🌺', '🌹', '🌼', '🪷'], chunri: ['🧣', '🚩', '✨'], bhog: ['🍧', '🥥', '🍬', '🥮'], incense: ['🪵', '✨', '💨'] };
+            const chosenEmojis = emojis[type] || ['🌸'];
+            for (let i = 0; i < 20; i++) {
+                particles.push({
+                    x: window.innerWidth / 2 + (Math.random() * 160 - 80),
+                    y: window.innerHeight / 2 + (Math.random() * 80 - 40),
+                    emoji: chosenEmojis[Math.floor(Math.random() * chosenEmojis.length)],
+                    size: Math.random() * 18 + 14,
+                    speedX: Math.random() * 5 - 2.5,
+                    speedY: Math.random() * -5 - 2,
+                    alpha: 1
+                });
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p, index) => {
+                p.x += p.speedX; p.y += p.speedY; p.alpha -= 0.018;
+                if (p.alpha <= 0) particles.splice(index, 1);
+                else {
+                    ctx.save(); ctx.globalAlpha = p.alpha; ctx.font = `${p.size}px serif`;
+                    ctx.fillText(p.emoji, p.x, p.y); ctx.restore();
+                }
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        function triggerPushpanjali() { offerItem('pushp'); }
+
+        const gameFortunes = [
+            { title: "मां शैलपुत्री का आशीर्वाद", msg: "आज आपके सभी रुके हुए कार्य पूर्ण होंगे। मन में शांति और सकारात्मक ऊर्जा बनी रहेगी।", color: "पीला (Yellow)" },
+            { title: "मां ब्रह्मचारिणी का वरदान", msg: "शिक्षा, करियर और लक्ष्यों को प्राप्त करने में सफलता मिलेगी। संयम बनाकर रखें।", color: "हरा (Green)" },
+            { title: "मां चंद्रघंटा की कृपा", msg: "साहस और आत्मविश्वास में वृद्धि होगी। शत्रु बाधाएं समाप्त होंगी और चारों तरफ यश फैलेगा।", color: "ग्रे (Grey)" }
+        ];
+
+        let gameChosen = false;
+        function chooseGameCard(index) {
+            if (gameChosen) return;
+            gameChosen = true;
+            playBellSound();
+            for (let i = 0; i < 3; i++) {
+                let card = document.getElementById(`gcard-${i}`);
+                let fortune = gameFortunes[(index + i) % gameFortunes.length];
+                document.getElementById(`gback-${i}`).innerHTML = `<b class="block mb-1">${fortune.title}</b><span class="text-[9px] opacity-80">क्लिक फल</span>`;
+                if (i === index) card.parentElement.classList.add('flipped');
+            }
+            setTimeout(() => {
+                let res = gameFortunes[index];
+                document.getElementById('resTitle').innerText = res.title;
+                document.getElementById('resMsg').innerText = res.msg;
+                document.getElementById('resColor').innerText = res.color;
+                document.getElementById('gameResultBox').classList.remove('hidden');
+            }, 600);
+        }
+
+        function resetFlipCards() {
+            gameChosen = false;
+            playBellSound();
+            for (let i = 0; i < 3; i++) {
+                document.getElementById(`gcard-${i}`).parentElement.classList.remove('flipped');
+            }
+            document.getElementById('gameResultBox').classList.add('hidden');
+        }
+
+        function shareGameResult() {
+            let title = document.getElementById('resTitle').innerText;
+            let text = `मैंने आज नवरात्रोत्सव डिजिटल मंदिर पर कार्ड खोलकर देखा और मुझे मिला: *${title}*! 🙏 Aap bhi apna rashifal dekhein!`;
+            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        const swaroops = {
+            1: { day: "प्रथम नवरात्रि", title: "मां शैलपुत्री", mantra: "ॐ देवी शैलपुत्र्यै नमः॥", img: "shailputri.png" },
+            2: { day: "द्वितीय नवरात्रि", title: "मां ब्रह्मचारिणी", mantra: "ॐ देवी ब्रह्मचारिण्यै नमः॥", img: "brahmacharini.png" },
+            3: { day: "तृतीय नवरात्रि", title: "मां चंद्रघंटा", mantra: "ॐ देवी चंद्रघण्टायै नमः॥", img: "chandraghanta.png" },
+            4: { day: "चतुर्थ नवरात्रि", title: "मां कूष्मांडा", mantra: "ॐ देवी कूष्माण्डायै नमः॥", img: "kushmanda.png" },
+            5: { day: "पंचम नवरात्रि", title: "मां स्कंदमाता", mantra: "ॐ देवी स्कन्दमात्रै नमः॥", img: "skandamata.png" },
+            6: { day: "षष्ठी नवरात्रि", title: "मां कात्यायनी", mantra: "ॐ देवी कात्यायन्यै नमः॥", img: "katyayani.png" },
+            7: { day: "सप्तम नवरात्रि", title: "मां कालरात्रि", mantra: "ॐ देवी कालरात्र्यै नमः॥", img: "kaalratri.png" },
+            8: { day: "अष्टम नवरात्रि", title: "मां महागौरी", mantra: "ॐ देवी महागौर्यै नमः॥", img: "mahagauri.png" },
+            9: { day: "नवम नवरात्रि", title: "मां सिद्धिदात्री", mantra: "ॐ देवी सिद्धिदात्र्यै नमः॥", img: "siddhidatri.png" }
+        };
+
+        function selectSwaroop(num) {
+            const data = swaroops[num];
+            if (!data) return;
+            document.getElementById('swaroopDay').innerText = data.day;
+            document.getElementById('swaroopTitle').innerText = data.title;
+            document.getElementById('swaroopMantra').innerText = `मंत्र: ${data.mantra}`;
+            document.getElementById('maaImage').src = data.img;
+            document.getElementById('wpImagePreview').src = data.img;
+            document.getElementById('wpCardTitle').innerText = data.title;
+            for (let i = 1; i <= 9; i++) {
+                const btn = document.getElementById(`swTab-${i}`);
+                if (i === num) btn.className = "swaroop-btn flex-shrink-0 p-2 rounded-xl border border-gold bg-gold/20 text-gold font-bold text-xs w-20 text-center shadow-md";
+                else btn.className = "swaroop-btn flex-shrink-0 p-2 rounded-xl border border-amber-500/20 bg-black/40 text-amber-200/80 text-xs w-20 text-center hover:border-gold transition";
+            }
+        }
+
+        let isDiyaLit = false;
+        let oilLevel = 0;
+
+        function openOilRefillModal() { document.getElementById('oilRefillModal').classList.remove('hidden'); }
+        function closeOilRefillModal() { document.getElementById('oilRefillModal').classList.add('hidden'); }
+
+        function lightDiyaWithMatch() {
+            if (isDiyaLit) {
+                alert("दीया पहले से ही प्रज्वलित है!");
+                return;
+            }
+            isDiyaLit = true;
+            oilLevel = 100;
+            document.getElementById('modalDiyaFlame').classList.remove('diya-unlit');
+            document.getElementById('thaliDiyaTop').classList.remove('diya-unlit');
+            document.getElementById('thaliDiyaBottom').classList.remove('diya-unlit');
+            document.getElementById('thaliDiyaLeft').classList.remove('diya-unlit');
+            document.getElementById('thaliDiyaRight').classList.remove('diya-unlit');
+            document.getElementById('thaliDiyaCenter').classList.remove('diya-unlit');
+            document.getElementById('aartiThali').classList.add('shrine-diya-glow');
+            document.getElementById('diyaStateText').innerText = "ज्योति पूर्ण रूप से प्रज्वलित है 🔥";
+            document.getElementById('diyaStateText').className = "text-xs text-emerald-400 font-bold";
+            document.getElementById('oilBar').style.width = '100%';
+            document.getElementById('oilLevelText').innerText = '100%';
+            document.getElementById('jyotiNavStatus').innerText = "🪔 अखंड ज्योति: प्रज्वलित";
+            playBellSound();
+            offerItem('pushp');
+        }
+
+        function refillOil() {
+            if (!isDiyaLit) {
+                alert("पहले माचिस चलाकर दीया प्रज्वलित करें!");
+                return;
+            }
+            oilLevel = Math.min(100, oilLevel + 25);
+            document.getElementById('oilBar').style.width = oilLevel + '%';
+            document.getElementById('oilLevelText').innerText = oilLevel + '%';
+            playBellSound();
+            offerItem('pushp');
+        }
+
+        setInterval(() => {
+            if (isDiyaLit && oilLevel > 0) {
+                oilLevel -= 1;
+                const bar = document.getElementById('oilBar');
+                const text = document.getElementById('oilLevelText');
+                if (bar) bar.style.width = oilLevel + '%';
+                if (text) text.innerText = oilLevel + '%';
+                if (oilLevel === 0) {
+                    isDiyaLit = false;
+                    document.getElementById('modalDiyaFlame').classList.add('diya-unlit');
+                    document.getElementById('thaliDiyaTop').classList.add('diya-unlit');
+                    document.getElementById('thaliDiyaBottom').classList.add('diya-unlit');
+                    document.getElementById('thaliDiyaLeft').classList.add('diya-unlit');
+                    document.getElementById('thaliDiyaRight').classList.add('diya-unlit');
+                    document.getElementById('thaliDiyaCenter').classList.add('diya-unlit');
+                    document.getElementById('aartiThali').classList.remove('shrine-diya-glow');
+                    document.getElementById('diyaStateText').innerText = "तेल समाप्त हो गया, दीया बुझ गया!";
+                    document.getElementById('diyaStateText').className = "text-xs text-rose-400 font-bold";
+                    document.getElementById('jyotiNavStatus').innerText = "⚠️ अखंड ज्योति: शांत";
+                }
+            }
+        }, 4000);
+
+        let totalJaap = 0, jaapTarget = 108;
+        function openJaapModal() { document.getElementById('jaapModal').classList.remove('hidden'); }
+        function closeJaapModal() { document.getElementById('jaapModal').classList.add('hidden'); }
+        function setJaapTarget(target) {
+            jaapTarget = target;
+            document.getElementById('jaapTargetDisplay').innerText = jaapTarget;
+            playBellSound();
+        }
+        function incrementAdvancedJaap() {
+            totalJaap++;
+            document.getElementById('fullJaapCount').innerText = totalJaap;
+            document.getElementById('quickJaapCount').innerText = totalJaap;
+            playBellSound();
+            if (totalJaap % jaapTarget === 0) {
+                playShankh();
+                alert(`🌟 बधाई हो! आपने ${jaapTarget} जाप का संकल्प पूर्ण कर लिया है! माता रानी की असीम कृपा आप पर बरसे।`);
+                offerItem('pushp');
+            }
+        }
+        function resetJaap() { totalJaap = 0; document.getElementById('fullJaapCount').innerText = 0; document.getElementById('quickJaapCount').innerText = 0; }
+
+        let kitchenStep = 1;
+        function openKitchenModal() { document.getElementById('kitchenModal').classList.remove('hidden'); loadKitchenStep(); }
+        function closeKitchenModal() { document.getElementById('kitchenModal').classList.add('hidden'); }
+        function loadKitchenStep() {
+            const box = document.getElementById('kitchenStepBox');
+            if (kitchenStep === 1) {
+                box.innerHTML = `<p class="text-gold font-bold">चरण 1: पावन कड़ाही में शुद्ध देसी घी डालें।</p><button onclick="proceedKitchenStep(1)" class="w-full bg-amber-500/20 border border-gold text-gold py-1.5 rounded-xl text-center hover:bg-gold/30">🫕 शुद्ध देसी घी डालें</button>`;
+            } else if (kitchenStep === 2) {
+                box.innerHTML = `<p class="text-gold font-bold">चरण 2: सूजी या आटा भूनें जब तक सुनहरा रंग न आ जाए।</p><button onclick="proceedKitchenStep(2)" class="w-full bg-amber-500/20 border border-gold text-gold py-1.5 rounded-xl text-center hover:bg-gold/30">🌾 सूजी डालकर भूनें</button>`;
+            } else if (kitchenStep === 3) {
+                box.innerHTML = `<p class="text-gold font-bold">चरण 3: पवित्र जल और चीनी (चाशनी) मिलाएं।</p><button onclick="proceedKitchenStep(3)" class="w-full bg-amber-500/20 border border-gold text-gold py-1.5 rounded-xl text-center hover:bg-gold/30">💧 जल व चीनी मिलाएं</button>`;
+            } else {
+                box.innerHTML = `<p class="text-emerald-400 font-bold text-xs">✨ हलवा-प्रसाद बनकर तैयार है! माँ को भोग अर्पित किया गया।</p><button onclick="resetKitchen()" class="w-full bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 font-bold py-1.5 rounded-xl text-center">पुनः रसोई शुरू करें</button>`;
+            }
+        }
+        function proceedKitchenStep(step) {
+            playBellSound();
+            kitchenStep++;
+            if (kitchenStep > 4) offerItem('bhog');
+            loadKitchenStep();
+        }
+        function resetKitchen() { kitchenStep = 1; loadKitchenStep(); }
+
+        function openWallpaperModal() { document.getElementById('wallpaperModal').classList.remove('hidden'); }
+        function closeWallpaperModal() { document.getElementById('wallpaperModal').classList.add('hidden'); }
+        document.getElementById('wpNameInput').addEventListener('input', function(e) {
+            const val = e.target.value.trim();
+            document.getElementById('wpCardName').innerText = val !== '' ? val : 'भक्तगण';
+        });
+        function downloadWallpaperCard() {
+            playBellSound();
+            alert('🎉 आपका नवरात्री स्टेटस कार्ड तैयार है! आप इसका स्क्रीनशॉट लेकर WhatsApp Status पर लगा सकते हैं।');
+        }
+
+        let fedKanyas = Array(9).fill(false);
+        function openKanyaPujanModal() { document.getElementById('kanyaPujanModal').classList.remove('hidden'); renderKanyaGrid(); }
+        function closeKanyaPujanModal() { document.getElementById('kanyaPujanModal').classList.add('hidden'); }
+        function renderKanyaGrid() {
+            const grid = document.getElementById('kanyaGrid');
+            grid.innerHTML = '';
+            let count = 0;
+            for(let i=0; i<9; i++) {
+                if (fedKanyas[i]) count++;
+                grid.innerHTML += `
+                    <div onclick="interactKanya(${i})" class="p-2 bg-black/60 border ${fedKanyas[i] ? 'border-emerald-500 bg-emerald-950/20' : 'border-gold/30'} rounded-xl text-center cursor-pointer active:scale-95 transition">
+                        <span class="text-2xl block mb-0.5">${fedKanyas[i] ? '👑' : '👧'}</span>
+                        <span class="text-[10px] text-amber-200 font-bold block">कन्या ${i+1}</span>
+                        <span class="text-[8px] ${fedKanyas[i] ? 'text-emerald-400 font-bold' : 'text-amber-400'} block">${fedKanyas[i] ? 'सेवा पूर्ण ✨' : 'पूजन करें'}</span>
+                    </div>`;
+            }
+            document.getElementById('fedKanyaCount').innerText = count;
+        }
+        function interactKanya(index) {
+            if (fedKanyas[index]) {
+                alert(`कन्या ${index+1} का पूजन पहले ही पूर्ण हो चुका है! आशीर्वाद: सुखी भव।`);
+                return;
+            }
+            fedKanyas[index] = true;
+            playBellSound();
+            offerItem('bhog');
+            renderKanyaGrid();
+        }
+    </script>
+</body>
+</html>
